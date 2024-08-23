@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="product-container">
+        <div class="img-card">
+            <img src="p1.jpg" alt="Leather Jacket" id="featured-image">
+            <!-- small img -->
+            <div class="small-Card">
+                <img src="p2.jpg" alt="Leather Jacket Detail 1" class="small-Img">
+                <img src="p3.jpg" alt="Leather Jacket Detail 2" class="small-Img">
+                <img src="p4.jpg" alt="Leather Jacket Detail 3" class="small-Img">
+                <img src="p5.jpg" alt="Leather Jacket Detail 4" class="small-Img">
+            </div>
+        </div>
+        <div class="product-info">
+            <h3>SXVCE LEATHER JACKET</h3>
+            <h5>Price: R600 each</h5>
+            <p>Select Quantity:</p>
+            <select id="quantity-selector">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <!-- Add more options as needed -->
+            </select>
+            <button id="buy-now">Buy Now</button>
+        </div>
+    </div>
+
+    <script>
+        const featuedImg = document.getElementById('featured-image');
+        const smallImgs = document.getElementsByClassName('small-Img');
+
+        Array.from(smallImgs).forEach((img, index) => {
+            img.addEventListener('click', () => {
+                featuedImg.src = img.src;
+                Array.from(smallImgs).forEach(s => s.classList.remove('sm-card'));
+                img.classList.add('sm-card');
+            });
+        });
+
+        const buyNowButton = document.getElementById('buy-now');
+        const quantitySelector = document.getElementById('quantity-selector');
+
+        buyNowButton.addEventListener('click', () => {
+            const selectedQuantity = quantitySelector.value;
+            let paymentLink;
+
+            switch(selectedQuantity) {
+                case "1":
+                    paymentLink = "https://pay.yoco.com/r/4gVBbq"; // Link for 1 jacket
+                    break;
+                case "2":
+                    paymentLink = "https://pay.yoco.com/r/2AM3lX"; // Link for 2 jackets
+                    break;
+                case "3":
+                    paymentLink = "https://pay.yoco.com/r/mOwbGK"; // Link for 3 jackets
+                    break;
+                // Add more cases as needed
+                default:
+                    paymentLink = "https://pay.yoco.com/r/4gVBbq"; // Default link
+            }
+
+            // Redirect to the appropriate payment link
+            window.location.href = paymentLink;
+        });
+    </script>
+</body>
+</html>
